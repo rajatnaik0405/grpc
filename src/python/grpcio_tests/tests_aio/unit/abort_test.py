@@ -57,7 +57,9 @@ class _GenericHandler(grpc.GenericRpcHandler):
         try:
             await context.abort(_ABORT_CODE, _ABORT_DETAILS)
         except aio.AbortError:
-            await context.abort(grpc.StatusCode.INVALID_ARGUMENT, "Override abort!")
+            await context.abort(
+                grpc.StatusCode.INVALID_ARGUMENT, "Override abort!"
+            )
 
     @staticmethod
     async def _abort_after_reply(unused_request, context):
@@ -151,7 +153,7 @@ class TestAbort(AioTestBase):
         self.assertEqual(_ABORT_CODE, await call.code())
         self.assertEqual(_ABORT_DETAILS, await call.details())
 
-    async def test_sync_handler_abort(self): 
+    async def test_sync_handler_abort(self):
         method = self._channel.unary_unary(_SYNC_ABORT)
         call = method(_REQUEST)
 
