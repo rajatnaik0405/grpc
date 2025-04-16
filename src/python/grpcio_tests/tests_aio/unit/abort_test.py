@@ -82,7 +82,7 @@ class _GenericHandler(grpc.GenericRpcHandler):
         if handler_details.method == _ABORT_AFTER_REPLY:
             return grpc.unary_stream_rpc_method_handler(self._abort_after_reply)
         if handler_details.method == _SYNC_ABORT:
-            return grpc.unary_unary_rpc_method_handler(self._sync_abort)    
+            return grpc.unary_unary_rpc_method_handler(self._sync_abort)
 
 
 async def _start_test_server():
@@ -153,7 +153,7 @@ class TestAbort(AioTestBase):
         self.assertEqual(_ABORT_CODE, await call.code())
         self.assertEqual(_ABORT_DETAILS, await call.details())
 
-    async def test_sync_handler_abort(self): 
+    async def test_sync_handler_abort(self):
         method = self._channel.unary_unary(_SYNC_ABORT)
         call = method(_REQUEST)
 
