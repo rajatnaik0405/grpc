@@ -281,7 +281,6 @@ class TestServerSideDoneCallback(AioTestBase):
         self.assertEqual(grpc.StatusCode.UNIMPLEMENTED, rpc_error.code())
 
     async def test_sync_streaming_callback(self):
-
         validation_future = self.loop.create_future()
 
         def sync_stream_handler(request_iterator, context):
@@ -303,7 +302,7 @@ class TestServerSideDoneCallback(AioTestBase):
         async for response in call:
             self.assertEqual(_RESPONSE, response)
 
-        await asyncio.wait_for(validation_future, timeout=5)    
+        await asyncio.wait_for(validation_future, timeout=5)
 
 
 if __name__ == "__main__":
