@@ -2251,9 +2251,11 @@ class Channel(grpc.Channel):
 
     def get_target(self) -> Optional[str]:
         """Returns the Verbatim Target channel or None if channel is closed."""
-        connectivity = _common.CYGRPC_CONNECTIVITY_STATE_TO_CHANNEL_CONNECTIVITY[
-            self._channel.check_connectivity_state(try_to_connect=False)
-        ]
+        connectivity = (
+            _common.CYGRPC_CONNECTIVITY_STATE_TO_CHANNEL_CONNECTIVITY[
+                self._channel.check_connectivity_state(try_to_connect=False)
+            ]
+        )
         if connectivity not in (
             grpc.ChannelConnectivity.IDLE,
             grpc.ChannelConnectivity.CONNECTING,
@@ -2268,7 +2270,7 @@ class Channel(grpc.Channel):
                 e.object,
                 e.start,
                 e.end,
-                f"Error decoding channel target string: {e.reason}"
+                f"Error decoding channel target string: {e.reason}",
             ) from e
 
     def __del__(self):
