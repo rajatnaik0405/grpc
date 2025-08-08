@@ -22,6 +22,7 @@ _README_PATH = os.path.join(_PACKAGE_PATH, "README.rst")
 # Ensure we're in the proper directory whether or not we're being used by pip.
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
+import python_protobuf_version
 import python_version
 
 import grpc_version
@@ -36,12 +37,18 @@ CLASSIFIERS = [
 PACKAGE_DIRECTORIES = {
     "": ".",
 }
-
+print(
+    f"rajat protobuf bounds = >= {python_protobuf_version.PYTHON_PROTOBUF_MIN_VERSION}, "
+    f"< {python_protobuf_version.PYTHON_PROTOBUF_MAX_VERSION}"
+)
 INSTALL_REQUIRES = (
     "opentelemetry-sdk>=1.25.0",
     "opentelemetry-resourcedetector-gcp>=1.6.0a0",
     "grpcio=={version}".format(version=grpc_version.VERSION),
-    "protobuf>=6.31.1,<7.0.0",
+    "protobuf>={min_version},<{max_version}".format(
+        min_version=python_protobuf_version.PYTHON_PROTOBUF_MIN_VERSION,
+        max_version=python_protobuf_version.PYTHON_PROTOBUF_MAX_VERSION,
+    ),
 )
 
 setuptools.setup(

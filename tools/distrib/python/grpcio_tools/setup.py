@@ -39,6 +39,7 @@ sys.path.insert(0, os.path.abspath("."))
 import _parallel_compile_patch
 import _spawn_patch
 import protoc_lib_deps
+import python_protobuf_version
 import python_version
 
 import grpc_version
@@ -347,7 +348,10 @@ setuptools.setup(
     packages=setuptools.find_packages("."),
     python_requires=f">={python_version.MIN_PYTHON_VERSION}",
     install_requires=[
-        "protobuf>=6.31.1,<7.0.0",
+        "protobuf>={min_version},<{max_version}".format(
+            min_version=python_protobuf_version.PYTHON_PROTOBUF_MIN_VERSION,
+            max_version=python_protobuf_version.PYTHON_PROTOBUF_MAX_VERSION,
+        ),
         "grpcio>={version}".format(version=grpc_version.VERSION),
         "setuptools",
     ],

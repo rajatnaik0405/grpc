@@ -23,6 +23,8 @@ _README_PATH = os.path.join(_PACKAGE_PATH, "README.rst")
 # Ensure we're in the proper directory whether or not we're being used by pip.
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
+import python_protobuf_version
+
 # Break import-style to ensure we can actually find our local modules.
 import python_version
 
@@ -63,7 +65,10 @@ PACKAGE_DIRECTORIES = {
 }
 
 INSTALL_REQUIRES = (
-    "protobuf>=6.31.1,<7.0.0",
+    "protobuf>={min_version},<{max_version}".format(
+        min_version=python_protobuf_version.PYTHON_PROTOBUF_MIN_VERSION,
+        max_version=python_protobuf_version.PYTHON_PROTOBUF_MAX_VERSION,
+    ),
     "grpcio>={version}".format(version=grpc_version.VERSION),
 )
 
