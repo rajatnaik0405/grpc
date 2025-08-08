@@ -26,6 +26,8 @@ PY3 = sys.version_info.major == 3
 # Ensure we're in the proper directory whether or not we're being used by pip.
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
+import python_protobuf_version
+
 # Break import-style to ensure we can actually find our in-repo dependencies.
 import commands
 import grpc_version
@@ -46,7 +48,10 @@ INSTALL_REQUIRES = (
     "grpcio-observability>={version}".format(version=grpc_version.VERSION),
     "xds-protos>={version}".format(version=grpc_version.VERSION),
     "oauth2client>=1.4.7",
-    "protobuf>=6.31.1,<7.0.0",
+    "protobuf>={min_version},<{max_version}".format(
+        min_version=python_protobuf_version.PYTHON_PROTOBUF_MIN_VERSION,
+        max_version=python_protobuf_version.PYTHON_PROTOBUF_MAX_VERSION,
+    ),
     "google-auth>=1.17.2",
     "requests>=2.14.2",
     "absl-py>=1.4.0",
