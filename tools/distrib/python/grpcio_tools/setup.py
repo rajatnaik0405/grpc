@@ -39,10 +39,10 @@ sys.path.insert(0, os.path.abspath("."))
 import _parallel_compile_patch
 import _spawn_patch
 import protoc_lib_deps
-import python_protobuf_version
 import python_version
 
 import grpc_version
+import python_protobuf_version
 
 _EXT_INIT_SYMBOL = None
 if sys.version_info[0] == 2:
