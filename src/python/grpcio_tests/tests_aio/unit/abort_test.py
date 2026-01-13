@@ -48,7 +48,7 @@ class _GenericHandler(grpc.GenericRpcHandler):
     async def _suppress_abort(unused_request, context):
         try:
             await context.abort(_ABORT_CODE, _ABORT_DETAILS)
-        except aio.AbortError as e:
+        except aio.AbortError:
             pass
         return _RESPONSE
 
@@ -56,7 +56,7 @@ class _GenericHandler(grpc.GenericRpcHandler):
     async def _replace_abort(unused_request, context):
         try:
             await context.abort(_ABORT_CODE, _ABORT_DETAILS)
-        except aio.AbortError as e:
+        except aio.AbortError:
             await context.abort(
                 grpc.StatusCode.INVALID_ARGUMENT, "Override abort!"
             )
