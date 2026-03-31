@@ -26,6 +26,8 @@ PY3 = sys.version_info.major == 3
 # Ensure we're in the proper directory whether or not we're being used by pip.
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
+import python_protobuf_version
+
 # Break import-style to ensure we can actually find our in-repo dependencies.
 import commands
 import grpc_version

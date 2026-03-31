@@ -24,6 +24,8 @@ _README_PATH = os.path.join(_PACKAGE_PATH, "README.rst")
 # Ensure we're in the proper directory whether or not we're being used by pip.
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
+import python_protobuf_version
+
 # Break import style to ensure that we can find same-directory modules.
 import grpc_version
 import python_protobuf_version
